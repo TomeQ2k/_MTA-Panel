@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MTA.Core.Application\MTA.Core.Application.csproj" />
+    <ProjectReference Include="..\MTA.Core.Common\MTA.Core.Common.csproj" />
+    <ProjectReference Include="..\MTA.Core.Domain\MTA.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

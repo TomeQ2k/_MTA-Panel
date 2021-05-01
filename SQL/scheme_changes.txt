@@ -1,0 +1,6 @@
+konta.salt type => varchar(128)
+tempinteriors.primaryId => add primary key
+add tables => articles/changelogs/article_images/changelogs_images/connections/web_notifications/
+              reports/user_reports/penalty_reports/bug_reports/report_subscribers/report_comments/report_images
+	      orders/order_files	
+INDEXES => INDEXES.sql

@@ -1,0 +1,2 @@
+DELETE FROM tokens WHERE dateCreated < DATE_ADD(NOW(), INTERVAL -2 DAY)
+

@@ -1,0 +1,1 @@
+MTA - activate your account$!$<p>Hi <strong>{{username}}</strong>!</p><br><p>In order to activate your account on MTA, click link below.<br><br>Activation account link: <a href='{{callbackUrl}}'>LINK</a></p><p>Best regards<br>MTA team</p>

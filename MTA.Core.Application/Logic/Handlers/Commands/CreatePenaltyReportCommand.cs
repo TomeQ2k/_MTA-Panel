@@ -1,0 +1,41 @@
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
+using MTA.Core.Application.Dtos;
+using MTA.Core.Application.Exceptions;
+using MTA.Core.Application.Logic.Requests.Commands;
+using MTA.Core.Application.Logic.Responses.Commands;
+using MTA.Core.Application.Services;
+using MTA.Core.Common.Enums;
+
+namespace MTA.Core.Application.Logic.Handlers.Commands
+{
+    public class CreatePenaltyReportCommand : IRequestHandler<CreatePenaltyReportRequest, CreatePenaltyReportResponse>
+    {
+        private readonly IReportService reportService;
+        private readonly IReportManager reportManager;
+        private readonly IMapper mapper;
+
+        public CreatePenaltyReportCommand(IReportService reportService, IReportManager reportManager, IMapper mapper)
+        {
+            this.reportService = reportService;
+            this.reportManager = reportManager;
+            this.mapper = mapper;
+        }
+
+        public async Task<CreatePenaltyReportResponse> Handle(CreatePenaltyReportRequest request,
+            CancellationToken cancellationToken)
+        {
+            var createdReport = await reportService.CreatePenaltyReport(request) ??
+                                throw new ServerException("Error occured during creating Report");
+
+            await reportManager.AssignAwaitingReports(ReportCategoryType.Penalty, request.IsPrivate);
+
+            return new CreatePenaltyReportResponse
+            {
+                PenaltyReport = mapper.Map<PenaltyReportDto>(createdReport)
+            };
+        }
+    }
+}

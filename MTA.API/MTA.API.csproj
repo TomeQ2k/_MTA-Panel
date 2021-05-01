@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>${NoWarn};1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="AspNetCoreRateLimit" Version="3.2.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MTA.Core.Application\MTA.Core.Application.csproj" />
+        <ProjectReference Include="..\MTA.Core.Common\MTA.Core.Common.csproj" />
+        <ProjectReference Include="..\MTA.Infrastructure.Persistence\MTA.Infrastructure.Persistence.csproj" />
+        <ProjectReference Include="..\MTA.Infrastructure.Shared\MTA.Infrastructure.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\files" />
+        <Folder Include="wwwroot\files\articles" />
+        <Folder Include="wwwroot\files\premium\library\5771" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\files\changelogs\2A4F1A7E0C9C49F7\c0330430641b4f33a3b1d29bdbfd55ac.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\files\articles\DD2FB7C9A97D4FA5\c321205a40f34ea6a139ca7bf7da4302.png" />
+    </ItemGroup>
+
+</Project>
