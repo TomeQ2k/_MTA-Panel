@@ -6,9 +6,8 @@ namespace MTA.Core.Domain.Entities
     {
         [Column("changelogId")] public string ChangelogId { get; protected set; }
 
-        public static ChangelogImage Create(string url, string path, string changelogId) => new()
+        public static ChangelogImage Create(string path, string changelogId) => new()
         {
-            Url = url,
             Path = path,
             ChangelogId = changelogId
         };

@@ -46,7 +46,7 @@ namespace MTA.Infrastructure.Shared.Services
             }
 
             var reportImages = uploadedPhotos.Select(up => new ReportImageBuilder()
-                .SetLocation(up.Url, up.Path)
+                .SetLocation(up.Path)
                 .SetReportId(report.Id)
                 .SetFileSize(up.Size)
                 .SetUserId(userId)

@@ -41,13 +41,15 @@ namespace MTA.Infrastructure.Shared.Services
 
         public void Delete(string path)
         {
+            if (!FileExists(path))
+                return;
+
             path = string.IsNullOrEmpty(path) ? $"{WebRootPath}/" : $"{WebRootPath}/{path}";
 
-            if (FileExists(path))
-                File.Delete(path);
+            File.Delete(path);
         }
 
-        public void DeleteDirectory(string path = null, bool isRecursive = true)
+        public void DeleteDirectory(string path, bool isRecursive = true)
         {
             path = string.IsNullOrEmpty(path) ? $"{WebRootPath}/" : $"{WebRootPath}/{path}";
 
@@ -56,16 +58,13 @@ namespace MTA.Infrastructure.Shared.Services
         }
 
         public void DeleteByFullPath(string fullPath)
-        {
-            if (FileExists(fullPath))
-                File.Delete(fullPath);
-        }
+            => File.Delete(fullPath);
 
         public async Task<string> ReadFile(string filePath)
-            => await File.ReadAllTextAsync(filePath);
+            => await File.ReadAllTextAsync($"{WebRootPath}/{filePath}");
 
         public async Task<string[]> ReadFileLines(string filePath)
-            => await File.ReadAllLinesAsync(filePath);
+            => await File.ReadAllLinesAsync($"{WebRootPath}/{filePath}");
 
         public async Task WriteFile(string file, string filePath)
             => await File.WriteAllTextAsync(filePath, file);
@@ -74,11 +73,11 @@ namespace MTA.Infrastructure.Shared.Services
         {
             var fileText = (await ReadFile(filePath)).Replace(oldValue, newValue);
 
-            using (var stream = new StreamWriter(filePath)) await stream.WriteAsync(fileText);
+            using (var stream = new StreamWriter($"{WebRootPath}{filePath}")) await stream.WriteAsync(fileText);
         }
 
         public bool FileExists(string filePath)
-            => File.Exists(filePath);
+            => File.Exists($"{WebRootPath}/{filePath}");
 
         public IEnumerable<string> GetDirectoryFilesNames(string path)
             => Directory.GetFiles(path);
@@ -87,12 +86,12 @@ namespace MTA.Infrastructure.Shared.Services
 
         private async Task<FileModel> UploadFile(IFormFile file, string filePath)
         {
-            if (file == null || file?.Length <= 0)
+            if (file == null || file.Length <= 0)
                 return null;
 
             var uploadFile = BuildFileModel(filePath, Path.GetExtension(file.FileName), file.Length);
 
-            using (var stream = File.Create(uploadFile.Path))
+            using (var stream = File.Create(uploadFile.FullPath))
             {
                 await file.CopyToAsync(stream);
             }
@@ -102,20 +101,19 @@ namespace MTA.Infrastructure.Shared.Services
 
         private FileModel BuildFileModel(string filePath, string fileExtension, long fileSize)
         {
-            var fullPath = filePath == null ? $"{WebRootPath}/files/" : $"{WebRootPath}/files/{filePath}/";
-            var fileUrl = filePath == null
-                ? $"{Configuration.GetValue<string>(AppSettingsKeys.ServerAddress)}files/"
-                : $"{Configuration.GetValue<string>(AppSettingsKeys.ServerAddress)}files/{filePath}/";
+            var (relativePath, fullPath) = ($"/files/{filePath}/", $"{WebRootPath}/files/{filePath}/");
+            var fileUrl = $"{Configuration.GetValue<string>(AppSettingsKeys.ServerAddress)}/files/{filePath}/";
 
             if (!Directory.Exists(fullPath))
                 Directory.CreateDirectory(fullPath);
 
             string fileName = $"{Utils.NewGuid(length: 32)}{fileExtension}";
 
+            relativePath += fileName;
             fullPath += fileName;
             fileUrl += fileName;
 
-            return new FileModel(fullPath, fileUrl, fileSize);
+            return new FileModel(relativePath, fileUrl, fileSize, fullPath);
         }
 
         #endregion

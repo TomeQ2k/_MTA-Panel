@@ -60,7 +60,7 @@ namespace MTA.UnitTests.Infrastructure.Shared.Services
             customInteriorManager.ExecuteAddCustomInterior(new PremiumFile(),
                 new List<GameTempObject>(), new GameTempInterior());
 
-            filesManager.Verify(f => f.DeleteByFullPath(It.IsAny<string>()), Times.Once);
+            filesManager.Verify(f => f.Delete(It.IsAny<string>()), Times.Once);
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace MTA.UnitTests.Infrastructure.Shared.Services
             customInteriorManager.ExecuteAddCustomInterior(new PremiumFile(),
                 new List<GameTempObject>(), new GameTempInterior());
 
-            filesManager.Verify(f => f.DeleteByFullPath(It.IsAny<string>()), Times.Once);
+            filesManager.Verify(f => f.Delete(It.IsAny<string>()), Times.Once);
         }
 
         [Test]

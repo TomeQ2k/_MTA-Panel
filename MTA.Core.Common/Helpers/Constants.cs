@@ -21,7 +21,7 @@ namespace MTA.Core.Common.Helpers
         public const int MaximumArticleTitleLength = 100;
         public const int MinimumArticleContentLength = 10;
         public const int MaximumArticleContentLength = 200;
-        public const int MaximumArticlePhotoSizeInMb = 5;
+        public const int MaximumArticlePhotoSizeInMb = 5 * UnitConversionMultiplier * UnitConversionMultiplier;
 
         public const int MaximumReviewRPTestNote = 1000;
 

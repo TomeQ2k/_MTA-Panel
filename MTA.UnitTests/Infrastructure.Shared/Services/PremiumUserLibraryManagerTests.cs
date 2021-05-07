@@ -101,7 +101,7 @@ namespace MTA.UnitTests.Infrastructure.Shared.Services
 
             premiumUserLibraryManager.AddFileToLibrary(file, PremiumFileType.Interior, OrderId);
 
-            filesManager.Verify(f => f.DeleteByFullPath(FilePath), Times.Once);
+            filesManager.Verify(f => f.Delete(FilePath), Times.Once);
         }
 
         [Test]
@@ -180,7 +180,7 @@ namespace MTA.UnitTests.Infrastructure.Shared.Services
         {
             premiumUserLibraryManager.ChangeUploadedSkinFile(file, OldFileId);
 
-            filesManager.Verify(f => f.DeleteByFullPath(It.IsAny<string>()), Times.Once);
+            filesManager.Verify(f => f.Delete(It.IsAny<string>()), Times.Once);
         }
 
         [Test]
@@ -231,7 +231,7 @@ namespace MTA.UnitTests.Infrastructure.Shared.Services
         {
             premiumUserLibraryManager.ChangeUploadedSkinFile(file, OldFileId);
 
-            filesManager.Verify(f => f.DeleteByFullPath(It.IsAny<string>()), Times.Once);
+            filesManager.Verify(f => f.Delete(It.IsAny<string>()), Times.Once);
         }
 
         [Test]
@@ -294,7 +294,7 @@ namespace MTA.UnitTests.Infrastructure.Shared.Services
         {
             premiumUserLibraryManager.ChangeUploadedInteriorFile(file, OldFileId);
 
-            filesManager.Verify(f => f.DeleteByFullPath(It.IsAny<string>()), Times.Once);
+            filesManager.Verify(f => f.Delete(It.IsAny<string>()), Times.Once);
         }
 
         [Test]

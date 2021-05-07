@@ -79,11 +79,11 @@ namespace MTA.Infrastructure.Shared.Services
         private async Task UploadImage(IFormFile image, Changelog changelog)
         {
             var uploadedPhoto = await filesManager.Upload(image, $"changelogs/{changelog.Id}");
-            var changelogImage = ChangelogImage.Create(uploadedPhoto.Url, uploadedPhoto.Path, changelog.Id);
+            var changelogImage = ChangelogImage.Create(uploadedPhoto.Path, changelog.Id);
 
             await database.ChangelogImageRepository.Insert(changelogImage, false);
 
-            changelog.SetImageUrl(uploadedPhoto.Url);
+            changelog.SetImageUrl(uploadedPhoto.Path);
         }
 
         private async Task DeleteImage(Changelog changelog)

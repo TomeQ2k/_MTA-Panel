@@ -4,6 +4,7 @@
     (
         string Path,
         string Url,
-        long Size
+        long Size,
+        string FullPath = null
     );
 }

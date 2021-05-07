@@ -7,9 +7,9 @@ namespace MTA.Core.Application.Builders
     {
         private readonly ReportImage reportImage = new();
 
-        public IReportImageBuilder SetLocation(string url, string path)
+        public IReportImageBuilder SetLocation(string path)
         {
-            reportImage.SetLocation(url, path);
+            reportImage.SetLocation(path);
             return this;
         }
 

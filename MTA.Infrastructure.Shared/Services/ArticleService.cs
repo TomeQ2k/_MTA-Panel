@@ -84,11 +84,11 @@ namespace MTA.Infrastructure.Shared.Services
         private async Task UploadImage(IFormFile image, Article article)
         {
             var uploadedPhoto = await filesManager.Upload(image, $"articles/{article.Id}");
-            var articleImage = ArticleImage.Create(uploadedPhoto.Url, uploadedPhoto.Path, article.Id);
+            var articleImage = ArticleImage.Create(uploadedPhoto.Path, article.Id);
 
             await database.ArticleImageRepository.Insert(articleImage, false);
 
-            article.SetImageUrl(uploadedPhoto.Url);
+            article.SetImageUrl(uploadedPhoto.Path);
         }
 
         private async Task DeleteImage(Article article)

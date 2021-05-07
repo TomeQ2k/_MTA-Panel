@@ -22,7 +22,7 @@ namespace MTA.Infrastructure.Shared.Services
         {
             var templateTuple = GetTemplateTuple(templateName);
 
-            var templateFromFile = await filesManager.ReadFile($"{filesManager.WebRootPath}/{templateTuple.Path}");
+            var templateFromFile = await filesManager.ReadFile(templateTuple.Path);
 
             var emailTemplate =
                 CreateEmailTemplateFromFile(templateFromFile, templateName, templateTuple.AllowedParameters);

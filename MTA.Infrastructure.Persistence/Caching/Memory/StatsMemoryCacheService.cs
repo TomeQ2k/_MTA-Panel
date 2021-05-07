@@ -30,7 +30,7 @@ namespace MTA.Infrastructure.Persistence.Caching.Memory
             if (statsModel != null)
                 return statsModel;
 
-            statsModel = (await filesManager.ReadFile($"{filesManager.WebRootPath}/data/stats.json"))?
+            statsModel = (await filesManager.ReadFile("/data/stats.json"))?
                 .FromJSON<StatsModel>(JsonSettings.JsonSerializerOptions);
 
             this.Set(MemoryCacheKeys.STATS_KEY, statsModel, new MemoryCacheEntryOptions()

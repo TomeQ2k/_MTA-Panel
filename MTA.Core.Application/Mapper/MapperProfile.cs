@@ -3,6 +3,7 @@ using MTA.Core.Application.Dtos;
 using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Models;
 using MTA.Core.Common.Enums;
+using MTA.Core.Common.Helpers;
 using MTA.Core.Domain.Entities;
 
 namespace MTA.Core.Application.Mapper
@@ -46,10 +47,12 @@ namespace MTA.Core.Application.Mapper
                 .ForMember(dest => dest.FactionName, opt => opt.MapFrom(f => f.Name));
             CreateMap<Faction, TopFactionByBankBalanceDto>();
 
-            CreateMap<Changelog, ChangelogDto>();
-
-            CreateMap<Article, ArticleDto>();
+            CreateMap<Article, ArticleDto>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(a => StorageLocation.BuildLocation(a.ImageUrl)));
             CreateMap<UpdateArticleRequest, Article>();
+
+            CreateMap<Changelog, ChangelogDto>()
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(c => StorageLocation.BuildLocation(c.ImageUrl)));
 
             CreateMap<UpdateChangelogRequest, Changelog>();
 
@@ -83,7 +86,8 @@ namespace MTA.Core.Application.Mapper
 
             CreateMap<ReportSubscriber, ReportSubscriberDto>();
 
-            CreateMap<ReportImage, ReportImageDto>();
+            CreateMap<ReportImage, ReportImageDto>()
+                .ForMember(dest => dest.Url, opt => opt.MapFrom(ri => StorageLocation.BuildLocation(ri.Path)));
 
             CreateMap<Ban, PenaltyDto>()
                 .ForMember(dest => dest.Date, opt => opt.MapFrom(b => b.DateCreated));
@@ -94,7 +98,8 @@ namespace MTA.Core.Application.Mapper
 
             CreateMap<Order, OrderDto>();
 
-            CreateMap<PremiumFile, PremiumFileDto>();
+            CreateMap<PremiumFile, PremiumFileDto>()
+                .ForMember(dest => dest.Url, opt => opt.MapFrom(pf => StorageLocation.BuildLocation(pf.Path)));
 
             CreateMap<Purchase, PurchaseDto>()
                 .ForMember(dest => dest.AccountName, opt => opt.MapFrom(p => p.Account.Username));

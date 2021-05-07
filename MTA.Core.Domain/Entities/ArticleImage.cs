@@ -6,9 +6,8 @@ namespace MTA.Core.Domain.Entities
     {
         [Column("articleId")] public string ArticleId { get; protected set; }
 
-        public static ArticleImage Create(string url, string path, string articleId) => new()
+        public static ArticleImage Create(string path, string articleId) => new()
         {
-            Url = url,
             Path = path,
             ArticleId = articleId
         };

@@ -20,7 +20,6 @@ create table orders
 create table premium_files
 (
     id          varchar(255) NOT NULL,
-    url         varchar(255) NOT NULL,
     path        varchar(255) NOT NULL,
     dateCreated datetime     NOT NULL,
     orderId     varchar(255) not null,

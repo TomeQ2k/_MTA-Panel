@@ -130,6 +130,8 @@ namespace MTA.API
             cultureInfo.NumberFormat.NumberDecimalSeparator = ".";
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            StorageLocation.Init(Configuration.GetValue<string>(AppSettingsKeys.ServerAddress));
         }
     }
 }

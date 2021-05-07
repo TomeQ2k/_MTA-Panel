@@ -30,21 +30,24 @@ namespace MTA.Infrastructure.Shared.Services
             PremiumFile premiumFile)
         {
             var (gameTempObjectsElements, gameTempInteriorsElements) = (
-                xmlReader.GetDescendantNodes(premiumFile.Path, (node) => node.Name.LocalName.Equals("object")),
-                xmlReader.GetDescendantNodes(premiumFile.Path, (node) => node.Name.LocalName.Equals("marker")));
+                xmlReader.GetDescendantNodes($"{filesManager.WebRootPath}{premiumFile.Path}",
+                    (node) => node.Name.LocalName.Equals("object")),
+                xmlReader.GetDescendantNodes($"{filesManager.WebRootPath}{premiumFile.Path}",
+                    (node) => node.Name.LocalName.Equals("marker")));
 
             int gameTempObjectsCount = gameTempObjectsElements.Count();
 
             if (gameTempObjectsCount > Constants.MaximumTempObjectsCount)
             {
-                filesManager.DeleteByFullPath(premiumFile.Path);
+                filesManager.Delete(premiumFile.Path);
 
                 throw new ServerException(
                     $"Maximum game temp objects count is: {Constants.MaximumTempObjectsCount}. Your interior file has: {gameTempObjectsCount}");
             }
 
             return (
-                TempObjectsAndInteriorsUtils.ConvertXElementsToTempObjects(gameTempObjectsElements, estate.Id, estate.InteriorId,
+                TempObjectsAndInteriorsUtils.ConvertXElementsToTempObjects(gameTempObjectsElements, estate.Id,
+                    estate.InteriorId,
                     httpContextReader.CurrentUsername),
                 TempObjectsAndInteriorsUtils.ConvertXElementsToTempInterior(gameTempInteriorsElements, estate.Id,
                     estate.InteriorId, httpContextReader.CurrentUserId));
@@ -55,13 +58,13 @@ namespace MTA.Infrastructure.Shared.Services
         {
             if (!await database.GameTempObjectRepository.InsertRange(gameTempObjects))
             {
-                filesManager.DeleteByFullPath(premiumFile.Path);
+                filesManager.Delete(premiumFile.Path);
                 throw new DatabaseException();
             }
 
             if (!await database.GameTempInteriorRepository.Insert(gameTempInterior, false))
             {
-                filesManager.DeleteByFullPath(premiumFile.Path);
+                filesManager.Delete(premiumFile.Path);
                 throw new DatabaseException();
             }
         }

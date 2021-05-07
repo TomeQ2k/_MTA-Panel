@@ -76,7 +76,6 @@ create table report_comments (
 
 create table report_images (
     id varchar(255) not null,
-    url varchar(255) not null,
     path varchar(255) not null,
     dateCreated datetime default now(),
     reportId varchar(255) not null,

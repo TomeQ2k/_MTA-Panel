@@ -87,7 +87,7 @@ namespace MTA.Infrastructure.Persistence.Logging
         #region private
 
         private string BuildLogFilesPath(DateTime date) =>
-            $"{filesManager.WebRootPath}/logs/log-{date.Year}{(date.Month < 10 ? $"0{date.Month}" : date.Month)}{(date.Day < 10 ? $"0{date.Day}" : date.Day)}.txt";
+            $"/logs/log-{date.Year}{(date.Month < 10 ? $"0{date.Month}" : date.Month)}{(date.Day < 10 ? $"0{date.Day}" : date.Day)}.txt";
 
         private static IEnumerable<ApiLogModel> ConvertLogsFileIntoList(string[] logsJson)
         {

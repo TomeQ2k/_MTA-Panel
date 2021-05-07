@@ -49,11 +49,11 @@ namespace MTA.Infrastructure.Shared.Services
                 throw new ServerException("File does not exists");
 
             string fileLibraryPath =
-                $"premium/library/{httpContextReader.CurrentUserId}/{Enum.GetName(type)?.ToLower()}s/";
+                $"premium/library/{httpContextReader.CurrentUserId}/{Enum.GetName(type)?.ToLower()}s";
 
             var uploadedFile = await filesManager.Upload(file, fileLibraryPath);
 
-            var premiumFile = BaseFile.Create<PremiumFile>(uploadedFile.Url, uploadedFile.Path)
+            var premiumFile = BaseFile.Create<PremiumFile>(uploadedFile.Path)
                 .SetOrderId(orderId)
                 .SetSkin(skinId)
                 .SetFileType(type)
@@ -63,7 +63,7 @@ namespace MTA.Infrastructure.Shared.Services
                 return premiumFile;
             else
             {
-                filesManager.DeleteByFullPath(uploadedFile.Path);
+                filesManager.Delete(uploadedFile.Path);
                 throw new DatabaseException("Adding order file to database failed");
             }
         }
@@ -90,7 +90,7 @@ namespace MTA.Infrastructure.Shared.Services
                 transaction.Complete();
             }
 
-            filesManager.DeleteByFullPath(oldPremiumFile.Path);
+            filesManager.Delete(oldPremiumFile.Path);
 
             return true;
         }
@@ -125,7 +125,7 @@ namespace MTA.Infrastructure.Shared.Services
                 transaction.Complete();
             }
 
-            filesManager.DeleteByFullPath(oldPremiumFile.Path);
+            filesManager.Delete(oldPremiumFile.Path);
 
             return true;
         }

@@ -17,7 +17,6 @@ CREATE TABLE changelogs (
 
 CREATE TABLE article_images(
     id VARCHAR(255) NOT NULL PRIMARY KEY,
-    url varchar(255) NOT NULL,
     path varchar(255) NOT NULL,
     dateCreated DATETIME  NOT NULL,
     articleId VARCHAR(255) NOT NULL,
@@ -26,7 +25,6 @@ CREATE TABLE article_images(
 
 CREATE TABLE changelog_images(
     id VARCHAR(255) NOT NULL PRIMARY KEY,
-    url varchar(255) NOT NULL,
     path varchar(255) NOT NULL,
     dateCreated DATETIME  NOT NULL,
     changelogId VARCHAR(255) NOT NULL,
