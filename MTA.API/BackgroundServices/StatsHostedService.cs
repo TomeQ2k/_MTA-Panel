@@ -23,6 +23,7 @@ namespace MTA.API.BackgroundServices
                     moneyStatsService) = FindStatsServices(scope);
 
                 var filesManager = scope.ServiceProvider.GetRequiredService<IFilesManager>();
+                var statsMemoryCacheService = scope.ServiceProvider.GetRequiredService<IStatsMemoryCacheService>();
 
                 var dataPath = $"{filesManager.WebRootPath}/data/stats.json";
 
@@ -35,6 +36,11 @@ namespace MTA.API.BackgroundServices
                     .ToJSON();
 
                 await filesManager.WriteFile(statsJson, dataPath);
+
+                statsMemoryCacheService.Set(MemoryCacheKeys.STATS_KEY,
+                    statsJson.FromJSON<StatsModel>(JsonSettings.JsonSerializerOptions),
+                    new MemoryCacheEntryOptions().SetSlidingExpiration(
+                        TimeSpan.FromMinutes(Constants.StatsHostedServiceTimeInMinutes)));
 
                 Log.Information("MTA stats has been updated");
                 base.Callback(state);
