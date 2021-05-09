@@ -11,7 +11,7 @@ using MTA.Core.Application.Logic.Responses;
 using MTA.Core.Application.Models;
 using MTA.Core.Common.Helpers;
 using MTA.Core.Domain.Data;
-use Serilog;
+using Serilog;
 
 namespace MTA.Core.Application.Filters
 {
