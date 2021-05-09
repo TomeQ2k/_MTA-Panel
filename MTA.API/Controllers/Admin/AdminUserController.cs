@@ -6,6 +6,7 @@ using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers.Admin
 {
@@ -29,6 +30,8 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched user #{request.UserId} as admin");
+
             return this.CreateResponse(response);
         }
 
@@ -39,6 +42,8 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> GetUsersByAdmin([FromQuery] GetUsersByAdminRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched users as admin");
 
             return this.CreateResponse(response);
         }
@@ -51,6 +56,9 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} sent reset password link to user: {request.Login}");
+
             return this.CreateResponse(response);
         }
 
@@ -62,6 +70,9 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} sent change email link to user's email address: {request.NewEmail}");
+
             return this.CreateResponse(response);
         }
 
@@ -72,6 +83,8 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> GetUserSerials([FromQuery] GetUserSerialsRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched user #{request.UserId} serials");
 
             return this.CreateResponse(response);
         }
@@ -86,6 +99,8 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} blocked account #{request.AccountId}");
+
             return this.CreateResponse(response);
         }
 
@@ -96,6 +111,9 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> AddCredits(AddCreditsRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added {request.Credits} credits to account #{request.UserId}");
 
             return this.CreateResponse(response);
         }
@@ -109,6 +127,8 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> CleanAccount([FromQuery] CleanAccountRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} cleaned account #{request.UserId}");
 
             return this.CreateResponse(response);
         }

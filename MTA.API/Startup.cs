@@ -17,7 +17,6 @@ using MTA.Core.Application.Logging;
 using MTA.Core.Application.Mapper;
 using MTA.Core.Application.SignalR;
 using MTA.Core.Common.Helpers;
-using Serilog;
 
 namespace MTA.API
 {
@@ -109,7 +108,7 @@ namespace MTA.API
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseSerilogRequestLogging();
+            app.ConfigureLogging();
 
             app.UseEndpoints(endpoints =>
             {

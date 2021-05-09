@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Queries;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -26,6 +27,8 @@ namespace MTA.API.Controllers
             [FromQuery] GetAdminActionsByActionAndUserIdRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched their admin actions");
 
             return this.CreateResponse(response);
         }

@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers.Admin
 {
@@ -32,6 +33,8 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched orders history");
+
             return this.CreateResponse(response);
         }
 
@@ -43,6 +46,9 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> SetOrderApprovalState([FromForm] SetOrderApprovalStateRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} set order #{request.OrderId} approval state to: {(int) request.ApprovalState}");
 
             return this.CreateResponse(response);
         }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Queries;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -27,6 +28,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched characters by character name");
+
             return this.CreateResponse(response);
         }
 
@@ -39,6 +42,8 @@ namespace MTA.API.Controllers
             [FromQuery] GetCharactersWithUserByCharacternameRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched characters with user by character name");
 
             return this.CreateResponse(response);
         }

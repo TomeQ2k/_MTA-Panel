@@ -20,7 +20,7 @@ namespace MTA.Infrastructure.Persistence.Database.Repositories
             => await QueryJoin<Order, PremiumFile, User>(new SqlBuilder()
                 .Select()
                 .From(Table).As("o")
-                .LeftJoin("o.id", new(RepositoryDictionary.FindTable(typeof(IRepository<PremiumFile>)), "orderId"), "f")
+                .LeftJoin("o.id", new(RepositoryDictionary.FindTable(typeof(IPremiumFileRepository)), "orderId"), "f")
                 .LeftJoin("o.userId", new(RepositoryDictionary.FindTable(typeof(IUserRepository)), "id"), "k")
                 .Where(new SqlBuilder().If(
                     new SqlBuilder().Append($"'{filtersParams.Username}'").IsNotNull.Build().Query,

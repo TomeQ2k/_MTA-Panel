@@ -6,6 +6,7 @@ using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -28,6 +29,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched their purchases history");
+
             return this.CreateResponse(response);
         }
 
@@ -41,6 +44,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> GetPurchasesByAdmin([FromQuery] GetPurchasesByAdminRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched admin purchases history");
 
             return this.CreateResponse(response);
         }

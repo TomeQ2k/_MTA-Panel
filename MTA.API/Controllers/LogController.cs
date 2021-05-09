@@ -6,6 +6,7 @@ using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -29,6 +30,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched MTA logs");
+
             return this.CreateResponse(response);
         }
 
@@ -43,6 +46,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched API logs");
+
             return this.CreateResponse(response);
         }
 
@@ -54,6 +59,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> GetAllowedLogActions([FromQuery] GetAllowedLogActionsRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched their allowed log actions");
 
             return this.CreateResponse(response);
         }

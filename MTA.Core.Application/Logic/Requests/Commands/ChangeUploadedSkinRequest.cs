@@ -9,7 +9,7 @@ namespace MTA.Core.Application.Logic.Requests.Commands
 {
     public record ChangeUploadedSkinRequest : IRequest<ChangeUploadedSkinResponse>
     {
-        public string FileId { get; init; }
+        public string OldFileId { get; init; }
         public int SkinId { get; init; }
         public IFormFile SkinFile { get; init; }
     }
@@ -18,7 +18,7 @@ namespace MTA.Core.Application.Logic.Requests.Commands
     {
         public ChangeUploadedSkinRequestValidator()
         {
-            RuleFor(x => x.FileId).NotNull();
+            RuleFor(x => x.OldFileId).NotNull();
             RuleFor(x => x.SkinId).NotNull();
             RuleFor(x => x.SkinFile).NotNull().AllowedFileExtensionsAre(false, ".jpg", ".png")
                 .MaxFileSizeIs((int) Constants.MaximumPremiumFileSize);

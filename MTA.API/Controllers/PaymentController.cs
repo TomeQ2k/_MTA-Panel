@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Logic.Responses.Commands;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -26,6 +27,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} created payment #{response.Result.OrderId} for {request.Price}");
+
             return this.CreateResponse(response);
         }
 
@@ -37,6 +41,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> CapturePayment([FromQuery] CapturePaymentRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} captured payment with token: {request.Token} and verified with status: {(response.IsVerified ? "VERIFIED" : "NOT VERIFIED")}");
 
             return this.CreateResponse(response);
         }

@@ -7,6 +7,8 @@ using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
+using MTA.Core.Common.Enums;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -30,6 +32,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User {request.Login} signed in");
+
             return this.CreateResponse(response);
         }
 
@@ -41,6 +45,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> SignUp(SignUpRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User {request.Email} signed up");
 
             return this.CreateResponse(response);
         }
@@ -54,6 +60,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User {request.Email} confirmed their account");
+
             return this.CreateResponse(response);
         }
 
@@ -65,6 +73,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> SendActivationEmail(SendActivationEmailRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User {request.Email} resent activation account email link to email address: {request.Email}");
 
             return this.CreateResponse(response);
         }
@@ -78,6 +89,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User {request.Email} resetted their password");
+
             return this.CreateResponse(response);
         }
 
@@ -89,6 +102,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> SendResetPassword(SendResetPasswordRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User {request.Login} sent reset password link to their email address");
 
             return this.CreateResponse(response);
         }
@@ -102,6 +117,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User {request.Email} verified their reset password link");
+
             return this.CreateResponse(response);
         }
 
@@ -113,6 +130,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> GetAuthValidations([FromQuery] GetAuthValidationsRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"{(request.AuthValidationType == AuthValidationType.Email ? "EMAIL" : "USERNAME")} '{request.Login}' availability validated with status: {(response.IsAvailable ? "AVAILABLE" : "NOT AVAILABLE")}");
 
             return this.CreateResponse(response);
         }

@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -30,6 +31,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} fetched questions for RP test part: {(int) request.PartType}");
+
             return this.CreateResponse(response);
         }
 
@@ -42,6 +46,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} processed RP test part one answers on the questions with status: {(response.IsPassed ? "PASSED" : "NOT PASSED")}");
+
             return this.CreateResponse(response);
         }
 
@@ -53,6 +60,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> GenerateAnswersForPartTwo(GenerateAnswersForPartTwoRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} generated answers for RP TEST part two");
 
             return this.CreateResponse(response);
         }
@@ -67,6 +76,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> ReviewRPTest(ReviewRPTestRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} reviewed RP test #{request.ApplicationId} and set state status to: {(int) request.StateType}");
 
             return this.CreateResponse(response);
         }

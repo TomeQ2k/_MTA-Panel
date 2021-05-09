@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Queries;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -27,6 +28,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> FetchStats([FromQuery] FetchStatsRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} fetched server stats");
 
             return this.CreateResponse(response);
         }

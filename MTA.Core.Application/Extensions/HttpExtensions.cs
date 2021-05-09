@@ -9,7 +9,9 @@ namespace MTA.Core.Application.Extensions
     public static class HttpExtensions
     {
         public static int GetCurrentUserId(this HttpContext httpContext)
-            => int.Parse(httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty);
+            => httpContext.IsAuthenticated()
+                ? int.Parse(httpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value)
+                : 0;
 
         public static string GetCurrentUsername(this HttpContext httpContext)
             => httpContext.User.FindFirst(ClaimTypes.Name)?.Value;

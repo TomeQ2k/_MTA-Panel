@@ -6,6 +6,7 @@ using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -28,6 +29,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} displayed profile");
+
             return this.CreateResponse(response);
         }
 
@@ -39,6 +42,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> ChangePassword([FromQuery] ChangePasswordRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} changed their password");
 
             return this.CreateResponse(response);
         }
@@ -52,6 +57,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} changed their email address to: {request.NewEmail}");
+
             return this.CreateResponse(response);
         }
 
@@ -63,6 +71,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> AddSerial([FromQuery] AddSerialRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added serial to their account: {request.Serial}");
 
             return this.CreateResponse(response);
         }
@@ -76,6 +87,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} sent change password link to their email address");
+
             return this.CreateResponse(response);
         }
 
@@ -87,6 +100,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> SendChangeEmailEmail(SendChangeEmailEmailRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} sent change email link to email address: {request.NewEmail}");
 
             return this.CreateResponse(response);
         }
@@ -100,6 +116,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} sent add serial link to their email address");
+
             return this.CreateResponse(response);
         }
 
@@ -111,6 +129,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> DeleteSerial([FromQuery] DeleteSerialRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} deleted serial from their account: #{request.SerialId}");
 
             return this.CreateResponse(response);
         }

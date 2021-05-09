@@ -7,6 +7,8 @@ using MTA.Core.Application.Filters;
 using MTA.Core.Application.Helpers;
 using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Logic.Responses.Commands;
+using MTA.Core.Common.Enums;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -30,6 +32,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added object protection to: {(request.ProtectionType == ObjectProtectionType.Estate ? "ESTATE" : "VEHICLE")} #{request.ObjectId} for: {request.Amount} days");
+
             return this.CreateResponse(response);
         }
 
@@ -42,6 +47,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> AddSerialSlot([FromForm] AddSerialSlotRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added {request.Amount} serial slots to their account");
 
             return this.CreateResponse(response);
         }
@@ -56,6 +64,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added custom skin #{request.SkinId} to their character #{request.CharacterId}");
+
             return this.CreateResponse(response);
         }
 
@@ -68,6 +79,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> AddCustomInterior([FromForm] AddCustomInteriorRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added custom interior to their estate #{request.EstateId}");
 
             return this.CreateResponse(response);
         }
@@ -82,6 +96,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} transfered their character #{request.SourceCharacterId} to character #{request.TargetCharacterId}");
+
             return this.CreateResponse(response);
         }
 
@@ -90,9 +107,12 @@ namespace MTA.API.Controllers
         /// </summary>
         [HttpPost("restoreDefaultSkin")]
         [ProducesResponseType(typeof(RestoreDefaultSkinResponse), 200)]
-        public async Task<IActionResult> RestoreDefaultSkin(RestoreDefaultInteriorRequest request)
+        public async Task<IActionResult> RestoreDefaultSkin(RestoreDefaultSkinRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} restored default skin for character #{request.CharacterId}");
 
             return this.CreateResponse(response);
         }
@@ -106,6 +126,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} restored default interior for estate #{request.EstateId}");
+
             return this.CreateResponse(response);
         }
 
@@ -117,6 +140,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> DonateServer(DonateServerRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} donated server for: {(int) request.DonationType} PLN");
 
             return this.CreateResponse(response);
         }

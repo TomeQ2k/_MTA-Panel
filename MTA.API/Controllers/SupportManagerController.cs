@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -33,6 +34,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched reports allowed assignees");
+
             return this.CreateResponse(response);
         }
 
@@ -44,6 +47,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> AddReportComment(AddReportCommentRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added report comment #{response.ReportComment?.Id} to report #{request.ReportId}");
 
             return this.CreateResponse(response);
         }
@@ -57,6 +63,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} added report subscriber #{response.ReportSubscriber?.UserId} to report #{request.ReportId}");
+
             return this.CreateResponse(response);
         }
 
@@ -68,6 +77,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> RemoveReportSubscriber([FromQuery] RemoveReportSubscriberRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} removed report subscriber #{request.UserId} from report #{request.ReportId}");
 
             return this.CreateResponse(response);
         }
@@ -81,6 +93,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} closed report #{request.ReportId}");
+
             return this.CreateResponse(response);
         }
 
@@ -92,6 +106,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> ArchiveReport(ArchiveReportRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} archived report #{request.ReportId}");
 
             return this.CreateResponse(response);
         }
@@ -105,6 +121,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} changed report #{request.ReportId} privacy to: {(response.IsPrivate ? "PRIVATE" : "NOT PRIVATE")}");
+
             return this.CreateResponse(response);
         }
 
@@ -116,6 +135,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> MoveReportAssignment(MoveReportAssignmentRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} moved report #{request.ReportId} assignment to user #{request.NewAssigneeId}");
 
             return this.CreateResponse(response);
         }
@@ -129,6 +151,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} accepted assignment to report #{request.ReportId}");
+
             return this.CreateResponse(response);
         }
 
@@ -140,6 +165,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> RejectReportAssignment(RejectReportAssignmentRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} rejected assignment to report #{request.ReportId}");
 
             return this.CreateResponse(response);
         }

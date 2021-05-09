@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers.Admin
 {
@@ -32,6 +33,9 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} fetched character #{request.CharacterId} as admin");
+
             return this.CreateResponse(response);
         }
 
@@ -44,6 +48,8 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched characters as admin");
+
             return this.CreateResponse(response);
         }
 
@@ -55,6 +61,9 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> ToggleBlockCharacter(ToggleBlockCharacterRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} {(response.IsBlocked ? "blocked" : "unblocked")} character #{request.CharacterId}");
 
             return this.CreateResponse(response);
         }

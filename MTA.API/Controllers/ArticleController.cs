@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -33,6 +34,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched article #{request.ArticleId}");
+
             return this.CreateResponse(response);
         }
 
@@ -47,6 +50,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched articles");
+
             return this.CreateResponse(response);
         }
 
@@ -58,6 +63,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> CreateArticle([FromForm] CreateArticleRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} created new article #{response.Article?.Id}");
 
             return this.CreateResponse(response);
         }
@@ -71,6 +78,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} updated article #{request.ArticleId}");
+
             return this.CreateResponse(response);
         }
 
@@ -82,6 +91,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> DeleteArticle([FromQuery] DeleteArticleRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} deleted article #{request.ArticleId}");
 
             return this.CreateResponse(response);
         }

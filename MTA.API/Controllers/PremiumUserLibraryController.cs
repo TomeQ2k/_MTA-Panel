@@ -6,6 +6,7 @@ using MTA.Core.Application.Logic.Requests.Commands;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -28,6 +29,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched their premium files library");
+
             return this.CreateResponse(response);
         }
 
@@ -40,6 +43,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} changed uploaded premium skin file #{request.OldFileId}");
+
             return this.CreateResponse(response);
         }
 
@@ -51,6 +57,9 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> ChangeUploadedInteriorFile([FromForm] ChangeUploadedInteriorRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information(
+                $"User #{HttpContext.GetCurrentUserId()} changed uploaded premium interior file #{request.OldFileId}");
 
             return this.CreateResponse(response);
         }

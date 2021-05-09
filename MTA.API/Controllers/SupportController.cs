@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -30,6 +31,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched report #{request.ReportId}");
+
             return this.CreateResponse(response);
         }
 
@@ -41,6 +44,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> FetchAllReports([FromQuery] FetchAllReportsRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched reports");
 
             return this.CreateResponse(response);
         }
@@ -57,6 +62,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched archived reports");
+
             return this.CreateResponse(response);
         }
 
@@ -68,6 +75,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> FetchReportsByUser([FromQuery] FetchReportsByUserRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched their reports");
 
             return this.CreateResponse(response);
         }
@@ -81,6 +90,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} created other report");
+
             return this.CreateResponse(response);
         }
 
@@ -92,6 +103,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> CreateBugReport([FromForm] CreateBugReportRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} created bug report");
 
             return this.CreateResponse(response);
         }
@@ -105,6 +118,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} created penalty report");
+
             return this.CreateResponse(response);
         }
 
@@ -116,6 +131,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> CreateUserReport([FromForm] CreateUserReportRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} created user report");
 
             return this.CreateResponse(response);
         }

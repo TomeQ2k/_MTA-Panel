@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Queries;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -25,6 +26,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> GetUserBans([FromQuery] GetUserBansRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched their bans");
 
             return this.CreateResponse(response);
         }

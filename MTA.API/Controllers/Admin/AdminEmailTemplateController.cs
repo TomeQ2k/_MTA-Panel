@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers.Admin
 {
@@ -32,6 +33,8 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched email template: {request.TemplateName}");
+
             return this.CreateResponse(response);
         }
 
@@ -44,6 +47,8 @@ namespace MTA.API.Controllers.Admin
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched email templates");
+
             return this.CreateResponse(response);
         }
 
@@ -55,6 +60,8 @@ namespace MTA.API.Controllers.Admin
         public async Task<IActionResult> EditEmailTemplate(EditEmailTemplateRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} edited email template: {request.TemplateName}");
 
             return this.CreateResponse(response);
         }

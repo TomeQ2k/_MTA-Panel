@@ -8,6 +8,7 @@ using MTA.Core.Application.Logic.Requests.Queries;
 using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Application.Logic.Responses.Queries;
 using MTA.Core.Common.Helpers;
+using Serilog;
 
 namespace MTA.API.Controllers
 {
@@ -33,6 +34,8 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} fetched changelogs");
+
             return this.CreateResponse(response);
         }
 
@@ -44,6 +47,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> CreateChangelog([FromForm] CreateChangelogRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} created new changelog #{response.Changelog?.Id}");
 
             return this.CreateResponse(response);
         }
@@ -57,6 +62,9 @@ namespace MTA.API.Controllers
         {
             var response = await mediator.Send(request);
 
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} updated changelog #{request.ChangelogId}");
+
+
             return this.CreateResponse(response);
         }
 
@@ -68,6 +76,8 @@ namespace MTA.API.Controllers
         public async Task<IActionResult> DeleteChangelog([FromQuery] DeleteChangelogRequest request)
         {
             var response = await mediator.Send(request);
+
+            Log.Information($"User #{HttpContext.GetCurrentUserId()} delete changelog #{request.ChangelogId}");
 
             return this.CreateResponse(response);
         }
