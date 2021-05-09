@@ -11,6 +11,7 @@ using MTA.Core.Application.Logic.Responses;
 using MTA.Core.Application.Models;
 using MTA.Core.Common.Helpers;
 using MTA.Core.Domain.Data;
+use Serilog;
 
 namespace MTA.Core.Application.Filters
 {
@@ -62,6 +63,8 @@ namespace MTA.Core.Application.Filters
 
             var databaseRestorer = context.HttpContext.RequestServices.GetRequiredService<IDatabaseRestorer>();
             databaseRestorer.EnqueueFromConnectionDatabaseRestorePoints(context.HttpContext.GetConnectionId());
+
+            Log.Information($"{context.Exception.GetType().Name}: {errorMessage} [{errorCode}] [HTTP {(int)statusCode}]");
 
             await base.OnExceptionAsync(context);
         }
