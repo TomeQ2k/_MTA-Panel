@@ -8,4 +8,4 @@ MTA Panel is a really large application for Grand Theft Auto game’s server. Pa
 
 **Technology**: ASP NET 5 Web API\
 **Database**: MySQL\
-**Frameworks & libraries**: Dapper, MediatR, SignalR, AutoMapper, Swagger, Serilog, NUnit, Moq, FluentValidation, SendGrid, PayPal SDK, Memory cache, SmartEnum, AspNetCoreRateLimit\
+**Frameworks & libraries**: Dapper, MediatR, SignalR, AutoMapper, Swagger, Serilog, NUnit, Moq, FluentValidation, SendGrid, PayPal SDK, Memory cache, SmartEnum, AspNetCoreRateLimit
