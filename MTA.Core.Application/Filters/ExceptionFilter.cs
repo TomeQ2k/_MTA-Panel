@@ -64,7 +64,7 @@ namespace MTA.Core.Application.Filters
             var databaseRestorer = context.HttpContext.RequestServices.GetRequiredService<IDatabaseRestorer>();
             databaseRestorer.EnqueueFromConnectionDatabaseRestorePoints(context.HttpContext.GetConnectionId());
 
-            Log.Error($"{context.Exception.GetType().Name}: {errorMessage} [{errorCode}] [HTTP {(int)statusCode}]");
+            Log.Error($"{context.Exception.GetType().Name}: {errorMessage} [{errorCode}] [HTTP {(int) statusCode}]");
 
             await base.OnExceptionAsync(context);
         }

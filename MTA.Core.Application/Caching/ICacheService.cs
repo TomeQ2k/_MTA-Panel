@@ -3,7 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace MTA.Core.Application.Caching
 {
-    public interface ICacheService<T> where T : class, new()
+    public interface ICacheService<T>
     {
         Task<T> Get(string key);
 

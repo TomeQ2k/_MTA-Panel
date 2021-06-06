@@ -5,7 +5,7 @@ using MTA.Core.Application.Helpers;
 
 namespace MTA.Infrastructure.Persistence.Caching
 {
-    public class MemoryCacheService<T> : IMemoryCacheService<T> where T : class, new()
+    public class MemoryCacheService<T> : IMemoryCacheService<T>
     {
         protected readonly IMemoryCache memoryCache;
 
@@ -16,7 +16,7 @@ namespace MTA.Infrastructure.Persistence.Caching
 
         public virtual Task<T> Get(string key)
         {
-            T entry = null;
+            T entry = default;
 
             memoryCache.TryGetValue(key, out entry);
 
