@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace MTA.API.Controllers
         /// Get and filter MTA logs from database. Request is paginated
         /// </summary>
         [HttpPost("mtaLogs/filter")]
-        [ProducesResponseType(typeof(GetMtaLogsResponse), 200)]
+        [ProducesResponseType(typeof(GetMtaLogsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetMtaLogs(GetMtaLogsRequest request)
         {
             var response = await mediator.Send(request);
@@ -36,12 +37,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[Authorize=Owner]</b> <br/><br/>
+        /// [Authorize=Owner]
         /// Get and filter web API logs from log file: /wwwroot/logs/ for specified date. Request is paginated
         /// </summary>
         [HttpGet("apiLogs/filter")]
         [Authorize(Policy = Constants.OwnerPolicy)]
-        [ProducesResponseType(typeof(GetApiLogsResponse), 200)]
+        [ProducesResponseType(typeof(GetApiLogsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetApiLogs([FromQuery] GetApiLogsRequest request)
         {
             var response = await mediator.Send(request);
@@ -55,7 +56,7 @@ namespace MTA.API.Controllers
         /// Get current user's allowed log actions due to their log read permissions
         /// </summary>
         [HttpGet("allowedActions")]
-        [ProducesResponseType(typeof(GetAllowedLogActionsResponse), 200)]
+        [ProducesResponseType(typeof(GetAllowedLogActionsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllowedLogActions([FromQuery] GetAllowedLogActionsRequest request)
         {
             var response = await mediator.Send(request);

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace MTA.API.Controllers.Admin
         /// Get character from database
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(GetCharacterResponse), 200)]
+        [ProducesResponseType(typeof(GetCharacterResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetCharacterByAdmin([FromQuery] GetCharacterRequest request)
         {
             var response = await mediator.Send(request);
@@ -43,7 +44,7 @@ namespace MTA.API.Controllers.Admin
         /// Get and filter characters from database. Request is paginated
         /// </summary>
         [HttpGet("filter")]
-        [ProducesResponseType(typeof(GetCharactersByAdminResponse), 200)]
+        [ProducesResponseType(typeof(GetCharactersByAdminResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetCharactersByAdmin([FromQuery] GetCharactersByAdminRequest request)
         {
             var response = await mediator.Send(request);
@@ -57,7 +58,7 @@ namespace MTA.API.Controllers.Admin
         /// Toggle block character status
         /// </summary>
         [HttpPatch("block/toggle")]
-        [ProducesResponseType(typeof(ToggleBlockCharacterResponse), 200)]
+        [ProducesResponseType(typeof(ToggleBlockCharacterResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ToggleBlockCharacter(ToggleBlockCharacterRequest request)
         {
             var response = await mediator.Send(request);

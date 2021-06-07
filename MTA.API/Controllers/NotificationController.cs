@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -24,7 +25,7 @@ namespace MTA.API.Controllers
         /// Get all current user's notifications
         /// </summary>
         [HttpGet("all")]
-        [ProducesResponseType(typeof(GetNotificationsResponse), 200)]
+        [ProducesResponseType(typeof(GetNotificationsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetNotifications([FromQuery] GetNotificationsRequest request)
         {
             var response = await mediator.Send(request);
@@ -38,7 +39,7 @@ namespace MTA.API.Controllers
         /// Mark specified current user's notification as read
         /// </summary>
         [HttpPatch("read")]
-        [ProducesResponseType(typeof(MarkAsReadNotificationResponse), 200)]
+        [ProducesResponseType(typeof(MarkAsReadNotificationResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> MarkAsRead(MarkAsReadNotificationRequest request)
         {
             var response = await mediator.Send(request);
@@ -53,7 +54,7 @@ namespace MTA.API.Controllers
         /// Mark all current user's notifications as read
         /// </summary>
         [HttpPut("readAll")]
-        [ProducesResponseType(typeof(MarkAllAsReadNotificationsResponse), 200)]
+        [ProducesResponseType(typeof(MarkAllAsReadNotificationsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> MarkAllAsRead(MarkAllAsReadNotificationsRequest request)
         {
             var response = await mediator.Send(request);
@@ -67,7 +68,7 @@ namespace MTA.API.Controllers
         /// Remove specified current user's notification
         /// </summary>
         [HttpDelete("remove")]
-        [ProducesResponseType(typeof(RemoveNotificationResponse), 200)]
+        [ProducesResponseType(typeof(RemoveNotificationResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> RemoveNotification([FromQuery] RemoveNotificationRequest request)
         {
             var response = await mediator.Send(request);
@@ -81,7 +82,7 @@ namespace MTA.API.Controllers
         /// Clear all current user's notifications
         /// </summary>
         [HttpDelete("clearAll")]
-        [ProducesResponseType(typeof(ClearAllNotificationsResponse), 200)]
+        [ProducesResponseType(typeof(ClearAllNotificationsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ClearAllNotifications([FromQuery] ClearAllNotificationsRequest request)
         {
             var response = await mediator.Send(request);
@@ -95,7 +96,7 @@ namespace MTA.API.Controllers
         /// Count all current user's unread notifications
         /// </summary>
         [HttpGet("unread/count")]
-        [ProducesResponseType(typeof(CountUnreadNotificationsResponse), 200)]
+        [ProducesResponseType(typeof(CountUnreadNotificationsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CountUnreadNotifications([FromQuery] CountUnreadNotificationsRequest request)
         {
             var response = await mediator.Send(request);

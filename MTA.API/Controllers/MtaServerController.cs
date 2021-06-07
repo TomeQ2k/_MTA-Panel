@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[AllowAnonymous]</b> <br/><br/>
+        /// [AllowAnonymous]
         /// Get home page stats using MTA game server script
         /// </summary>    
         [HttpGet("homepageStats")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(GetHomepageStatsResponse), 200)]
+        [ProducesResponseType(typeof(GetHomepageStatsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetHomepageStats([FromQuery] GetHomepageStatsRequest request)
         {
             var response = await mediator.Send(request);

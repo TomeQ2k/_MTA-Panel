@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +25,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[AllowAnonymous]</b> <br/><br/>
+        /// [AllowAnonymous]
         /// Get article from database 
         /// </summary>
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(GetArticleResponse), 200)]
+        [ProducesResponseType(typeof(GetArticleResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetArticle([FromQuery] GetArticleRequest request)
         {
             var response = await mediator.Send(request);
@@ -40,12 +41,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[AllowAnonymous]</b> <br/><br/>
+        /// [AllowAnonymous]
         /// Get articles from database [default limit = 6] 
         /// </summary>
         [HttpGet("all")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(GetArticlesResponse), 200)]
+        [ProducesResponseType(typeof(GetArticlesResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetArticles([FromQuery] GetArticlesRequest request)
         {
             var response = await mediator.Send(request);
@@ -59,7 +60,7 @@ namespace MTA.API.Controllers
         /// Create article in database
         /// </summary>
         [HttpPost("create")]
-        [ProducesResponseType(typeof(CreateArticleResponse), 200)]
+        [ProducesResponseType(typeof(CreateArticleResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateArticle([FromForm] CreateArticleRequest request)
         {
             var response = await mediator.Send(request);
@@ -73,7 +74,7 @@ namespace MTA.API.Controllers
         /// Update article in database
         /// </summary>
         [HttpPut("update")]
-        [ProducesResponseType(typeof(UpdateArticleResponse), 200)]
+        [ProducesResponseType(typeof(UpdateArticleResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateArticle([FromForm] UpdateArticleRequest request)
         {
             var response = await mediator.Send(request);
@@ -87,7 +88,7 @@ namespace MTA.API.Controllers
         /// Delete article in database
         /// </summary>
         [HttpDelete("delete")]
-        [ProducesResponseType(typeof(DeleteArticleResponse), 200)]
+        [ProducesResponseType(typeof(DeleteArticleResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteArticle([FromQuery] DeleteArticleRequest request)
         {
             var response = await mediator.Send(request);

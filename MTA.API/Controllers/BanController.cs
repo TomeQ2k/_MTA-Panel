@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -22,7 +23,7 @@ namespace MTA.API.Controllers
         /// Get all current user's bans from database
         /// </summary>
         [HttpGet("all")]
-        [ProducesResponseType(typeof(GetUserBansResponse), 200)]
+        [ProducesResponseType(typeof(GetUserBansResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetUserBans([FromQuery] GetUserBansRequest request)
         {
             var response = await mediator.Send(request);

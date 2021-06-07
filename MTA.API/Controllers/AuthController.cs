@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace MTA.API.Controllers
         /// Sign in user using email/username and password
         /// </summary>
         [HttpPost("signIn")]
-        [ProducesResponseType(typeof(SignInResponse), 200)]
+        [ProducesResponseType(typeof(SignInResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SignIn(SignInRequest request)
         {
             var response = await mediator.Send(request);
@@ -41,7 +42,7 @@ namespace MTA.API.Controllers
         /// Sign up user using username, email, password and MTA serial. Request is secured by Captcha. Request also allow to create account thanks to the reference of another user
         /// </summary>
         [HttpPost("signUp")]
-        [ProducesResponseType(typeof(SignUpResponse), 200)]
+        [ProducesResponseType(typeof(SignUpResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SignUp(SignUpRequest request)
         {
             var response = await mediator.Send(request);
@@ -55,7 +56,7 @@ namespace MTA.API.Controllers
         /// Confirm account (activate) using user's email and security token created during signing up
         /// </summary>
         [HttpGet("confirm")]
-        [ProducesResponseType(typeof(ConfirmAccountResponse), 200)]
+        [ProducesResponseType(typeof(ConfirmAccountResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ConfirmAccount([FromQuery] ConfirmAccountRequest request)
         {
             var response = await mediator.Send(request);
@@ -69,7 +70,7 @@ namespace MTA.API.Controllers
         /// Send activation account email to provided email address
         /// </summary>
         [HttpPost("confirm/send")]
-        [ProducesResponseType(typeof(SendActivationEmailResponse), 200)]
+        [ProducesResponseType(typeof(SendActivationEmailResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SendActivationEmail(SendActivationEmailRequest request)
         {
             var response = await mediator.Send(request);
@@ -84,7 +85,7 @@ namespace MTA.API.Controllers
         /// Reset user's password directly when the user use reset password link sent to their email address
         /// </summary>
         [HttpPut("resetPassword")]
-        [ProducesResponseType(typeof(ResetPasswordResponse), 200)]
+        [ProducesResponseType(typeof(ResetPasswordResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
         {
             var response = await mediator.Send(request);
@@ -98,7 +99,7 @@ namespace MTA.API.Controllers
         /// Send reset password email to provided email address. Request is secured by Captcha
         /// </summary>
         [HttpPost("resetPassword/send")]
-        [ProducesResponseType(typeof(SendResetPasswordResponse), 200)]
+        [ProducesResponseType(typeof(SendResetPasswordResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SendResetPassword(SendResetPasswordRequest request)
         {
             var response = await mediator.Send(request);
@@ -112,7 +113,7 @@ namespace MTA.API.Controllers
         /// Verify reset password link and token. Request should be called before ResetPassword
         /// </summary>
         [HttpGet("resetPassword/verify")]
-        [ProducesResponseType(typeof(VerifyResetPasswordResponse), 200)]
+        [ProducesResponseType(typeof(VerifyResetPasswordResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> VerifyResetPassword([FromQuery] VerifyResetPasswordRequest request)
         {
             var response = await mediator.Send(request);
@@ -126,7 +127,7 @@ namespace MTA.API.Controllers
         /// Validate username (0) or email address (1) if not already exist in database
         /// </summary>
         [HttpGet("validations")]
-        [ProducesResponseType(typeof(GetAuthValidationsResponse), 200)]
+        [ProducesResponseType(typeof(GetAuthValidationsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetAuthValidations([FromQuery] GetAuthValidationsRequest request)
         {
             var response = await mediator.Send(request);

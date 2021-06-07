@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -22,7 +23,7 @@ namespace MTA.API.Controllers
         /// Get limited (50) users from database by specified username
         /// </summary>
         [HttpGet("all/byUsername")]
-        [ProducesResponseType(typeof(GetUsersByUsernameResponse), 200)]
+        [ProducesResponseType(typeof(GetUsersByUsernameResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetUsersByUsername([FromQuery] GetUsersByUsernameRequest request)
         {
             var response = await mediator.Send(request);

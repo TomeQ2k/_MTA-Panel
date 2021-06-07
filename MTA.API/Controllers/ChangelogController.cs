@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +25,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[AllowAnonymous]</b> <br/><br/>
+        /// [AllowAnonymous]
         /// Get all changelogs from database
         /// </summary>
         [HttpGet("all")]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(GetChangelogsResponse), 200)]
+        [ProducesResponseType(typeof(GetChangelogsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetChangelogs([FromQuery] GetChangelogsRequest request)
         {
             var response = await mediator.Send(request);
@@ -43,7 +44,7 @@ namespace MTA.API.Controllers
         /// Create changelog in database
         /// </summary>
         [HttpPost("create")]
-        [ProducesResponseType(typeof(CreateChangelogResponse), 200)]
+        [ProducesResponseType(typeof(CreateChangelogResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateChangelog([FromForm] CreateChangelogRequest request)
         {
             var response = await mediator.Send(request);
@@ -57,7 +58,7 @@ namespace MTA.API.Controllers
         /// Update changelog in database
         /// </summary>
         [HttpPut("update")]
-        [ProducesResponseType(typeof(UpdateChangelogResponse), 200)]
+        [ProducesResponseType(typeof(UpdateChangelogResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateChangelog([FromForm] UpdateChangelogRequest request)
         {
             var response = await mediator.Send(request);
@@ -72,7 +73,7 @@ namespace MTA.API.Controllers
         /// Delete changelog in database
         /// </summary>
         [HttpDelete("delete")]
-        [ProducesResponseType(typeof(DeleteChangelogResponse), 200)]
+        [ProducesResponseType(typeof(DeleteChangelogResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteChangelog([FromQuery] DeleteChangelogRequest request)
         {
             var response = await mediator.Send(request);

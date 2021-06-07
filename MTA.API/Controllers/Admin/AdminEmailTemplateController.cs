@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace MTA.API.Controllers.Admin
         /// Find email template in application static files: /wwwroot/data/email_templates/
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(GetEmailTemplateResponse), 200)]
+        [ProducesResponseType(typeof(GetEmailTemplateResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetEmailTemplate([FromQuery] GetEmailTemplateRequest request)
         {
             var response = await mediator.Send(request);
@@ -42,7 +43,7 @@ namespace MTA.API.Controllers.Admin
         /// Find all email templates in application static files: /wwwroot/data/email_templates/
         /// </summary>
         [HttpGet("all")]
-        [ProducesResponseType(typeof(GetEmailTemplatesResponse), 200)]
+        [ProducesResponseType(typeof(GetEmailTemplatesResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetEmailTemplates([FromQuery] GetEmailTemplatesRequest request)
         {
             var response = await mediator.Send(request);
@@ -56,7 +57,7 @@ namespace MTA.API.Controllers.Admin
         /// Edit email template and save it in application static files: /wwwroot/data/email_templates/
         /// </summary>
         [HttpPut("edit")]
-        [ProducesResponseType(typeof(EditEmailTemplateResponse), 200)]
+        [ProducesResponseType(typeof(EditEmailTemplateResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> EditEmailTemplate(EditEmailTemplateRequest request)
         {
             var response = await mediator.Send(request);

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -22,7 +23,7 @@ namespace MTA.API.Controllers
         /// Get all admin actions by specified action type and connected to specified user
         /// </summary>
         [HttpGet("byActionAndUserId/filter")]
-        [ProducesResponseType(typeof(GetAdminActionsByActionAndUserIdResponse), 200)]
+        [ProducesResponseType(typeof(GetAdminActionsByActionAndUserIdResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetAdminActionsByActionAndUserId(
             [FromQuery] GetAdminActionsByActionAndUserIdRequest request)
         {

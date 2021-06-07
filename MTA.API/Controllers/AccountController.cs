@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -24,7 +25,7 @@ namespace MTA.API.Controllers
         /// Get user's account data from database
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(GetCurrentUserResponse), 200)]
+        [ProducesResponseType(typeof(GetCurrentUserResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetCurrentUser([FromQuery] GetCurrentUserRequest request)
         {
             var response = await mediator.Send(request);
@@ -38,7 +39,7 @@ namespace MTA.API.Controllers
         /// Change user's password when user use their change password link (token) received on provided before email address (SendChangePasswordEmail)
         /// </summary>
         [HttpGet("changePassword")]
-        [ProducesResponseType(typeof(ChangePasswordResponse), 200)]
+        [ProducesResponseType(typeof(ChangePasswordResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ChangePassword([FromQuery] ChangePasswordRequest request)
         {
             var response = await mediator.Send(request);
@@ -52,7 +53,7 @@ namespace MTA.API.Controllers
         /// Change user's email when user use their change email link (token) received on provided before email address (SendChangeEmailEmail)
         /// </summary>
         [HttpGet("changeEmail")]
-        [ProducesResponseType(typeof(ChangeEmailResponse), 200)]
+        [ProducesResponseType(typeof(ChangeEmailResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ChangeEmail([FromQuery] ChangeEmailRequest request)
         {
             var response = await mediator.Send(request);
@@ -67,7 +68,7 @@ namespace MTA.API.Controllers
         /// Add new MTA serial to user's account when user use their add serial link (token) received on provided before email address (SendAddSerialEmail)
         /// </summary>
         [HttpGet("serial/add")]
-        [ProducesResponseType(typeof(AddSerialResponse), 200)]
+        [ProducesResponseType(typeof(AddSerialResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> AddSerial([FromQuery] AddSerialRequest request)
         {
             var response = await mediator.Send(request);
@@ -82,7 +83,7 @@ namespace MTA.API.Controllers
         /// Send change password token to provided email address
         /// </summary>
         [HttpPost("changePassword/send")]
-        [ProducesResponseType(typeof(SendChangePasswordEmailResponse), 200)]
+        [ProducesResponseType(typeof(SendChangePasswordEmailResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SendChangePasswordEmail(SendChangePasswordEmailRequest request)
         {
             var response = await mediator.Send(request);
@@ -96,7 +97,7 @@ namespace MTA.API.Controllers
         /// Send change email token to provided email address
         /// </summary>
         [HttpPost("changeEmail/send")]
-        [ProducesResponseType(typeof(SendChangeEmailEmailResponse), 200)]
+        [ProducesResponseType(typeof(SendChangeEmailEmailResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SendChangeEmailEmail(SendChangeEmailEmailRequest request)
         {
             var response = await mediator.Send(request);
@@ -111,7 +112,7 @@ namespace MTA.API.Controllers
         /// Send add serial token to provided email address
         /// </summary>
         [HttpPost("serial/add/send")]
-        [ProducesResponseType(typeof(SendAddSerialEmailResponse), 200)]
+        [ProducesResponseType(typeof(SendAddSerialEmailResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SendAddSerialEmail(SendAddSerialEmailRequest request)
         {
             var response = await mediator.Send(request);
@@ -125,7 +126,7 @@ namespace MTA.API.Controllers
         /// Delete one user's MTA serial using serial id
         /// </summary>
         [HttpDelete("serial/delete")]
-        [ProducesResponseType(typeof(DeleteSerialResponse), 200)]
+        [ProducesResponseType(typeof(DeleteSerialResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteSerial([FromQuery] DeleteSerialRequest request)
         {
             var response = await mediator.Send(request);

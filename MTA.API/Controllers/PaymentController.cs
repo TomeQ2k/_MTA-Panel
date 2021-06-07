@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -22,7 +23,7 @@ namespace MTA.API.Controllers
         /// Create payment (OrderTransaction) in database and call external payment API. Request returns links which provide payment processing on the external payment API side
         /// </summary>
         [HttpGet("create")]
-        [ProducesResponseType(typeof(CreatePaymentResponse), 200)]
+        [ProducesResponseType(typeof(CreatePaymentResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreatePayment([FromQuery] CreatePaymentRequest request)
         {
             var response = await mediator.Send(request);
@@ -37,7 +38,7 @@ namespace MTA.API.Controllers
         /// Capture payment using external payment API if transaction succeeded. Change validated status of OrderTransaction in database
         /// </summary>
         [HttpGet("capture")]
-        [ProducesResponseType(typeof(CapturePaymentResponse), 200)]
+        [ProducesResponseType(typeof(CapturePaymentResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CapturePayment([FromQuery] CapturePaymentRequest request)
         {
             var response = await mediator.Send(request);

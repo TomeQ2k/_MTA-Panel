@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -22,7 +23,7 @@ namespace MTA.API.Controllers
         /// Get limited (50) characters from database by specified character name
         /// </summary>
         [HttpGet("all/byCharactername")]
-        [ProducesResponseType(typeof(GetCharactersByCharacternameResponse), 200)]
+        [ProducesResponseType(typeof(GetCharactersByCharacternameResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetCharactersByCharactername(
             [FromQuery] GetCharactersByCharacternameRequest request)
         {
@@ -37,7 +38,7 @@ namespace MTA.API.Controllers
         /// Get limited (50) characters from database by specified character name with relation to User
         /// </summary>
         [HttpGet("all/withUserByCharactername")]
-        [ProducesResponseType(typeof(GetCharactersWithUserByCharacternameResponse), 200)]
+        [ProducesResponseType(typeof(GetCharactersWithUserByCharacternameResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetCharactersWithUserByCharactername(
             [FromQuery] GetCharactersWithUserByCharacternameRequest request)
         {

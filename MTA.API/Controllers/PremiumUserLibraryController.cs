@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
@@ -24,7 +25,7 @@ namespace MTA.API.Controllers
         /// Fetch all current user's premium files library
         /// </summary>
         [HttpGet]
-        [ProducesResponseType(typeof(FetchPremiumLibraryFilesResponse), 200)]
+        [ProducesResponseType(typeof(FetchPremiumLibraryFilesResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> FetchLibraryFiles([FromQuery] FetchPremiumLibraryFilesRequest request)
         {
             var response = await mediator.Send(request);
@@ -38,7 +39,7 @@ namespace MTA.API.Controllers
         /// Change uploaded premium skin file
         /// </summary>
         [HttpPost("skin/change")]
-        [ProducesResponseType(typeof(ChangeUploadedSkinResponse), 200)]
+        [ProducesResponseType(typeof(ChangeUploadedSkinResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ChangeUploadedSkin([FromForm] ChangeUploadedSkinRequest request)
         {
             var response = await mediator.Send(request);
@@ -53,7 +54,7 @@ namespace MTA.API.Controllers
         /// Change uploaded premium interior file
         /// </summary>
         [HttpPost("interior/change")]
-        [ProducesResponseType(typeof(ChangeUploadedInteriorResponse), 200)]
+        [ProducesResponseType(typeof(ChangeUploadedInteriorResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ChangeUploadedInteriorFile([FromForm] ChangeUploadedInteriorRequest request)
         {
             var response = await mediator.Send(request);

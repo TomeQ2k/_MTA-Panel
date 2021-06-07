@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace MTA.API.Controllers.Admin
         /// Get and filter orders from database (premium operations executed). Request is paginated 
         /// </summary>
         [HttpGet("filter")]
-        [ProducesResponseType(typeof(GetOrdersResponse), 200)]
+        [ProducesResponseType(typeof(GetOrdersResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetOrders([FromQuery] GetOrdersRequest request)
         {
             var response = await mediator.Send(request);
@@ -42,7 +43,7 @@ namespace MTA.API.Controllers.Admin
         /// Set approval state of order (add custom skin/interior by user) - accept (1) or deny (2). Admin can optionally write note to their decision
         /// </summary>
         [HttpPut("approvalState/set")]
-        [ProducesResponseType(typeof(SetOrderApprovalStateResponse), 200)]
+        [ProducesResponseType(typeof(SetOrderApprovalStateResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> SetOrderApprovalState([FromForm] SetOrderApprovalStateRequest request)
         {
             var response = await mediator.Send(request);

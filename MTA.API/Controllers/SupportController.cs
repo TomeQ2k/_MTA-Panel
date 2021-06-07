@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace MTA.API.Controllers
         /// Get report from database with relations to: ReportComments, ReportSubscribers, ReportImages
         /// </summary>
         [HttpGet("report/get")]
-        [ProducesResponseType(typeof(GetReportResponse), 200)]
+        [ProducesResponseType(typeof(GetReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetReport([FromQuery] GetReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -40,7 +41,7 @@ namespace MTA.API.Controllers
         /// Fetch and filter reports from specified category (or all) from database. Request is paginated
         /// </summary>
         [HttpGet("reports/all")]
-        [ProducesResponseType(typeof(FetchAllReportsResponse), 200)]
+        [ProducesResponseType(typeof(FetchAllReportsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> FetchAllReports([FromQuery] FetchAllReportsRequest request)
         {
             var response = await mediator.Send(request);
@@ -51,12 +52,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[Authorize=AllOwners]</b> <br/><br/>
+        /// [Authorize=AllOwners]
         /// Fetch and filter archived reports from database. Request is paginated
         /// </summary>
         [HttpGet("reports/archived")]
         [Authorize(Policy = Constants.AllOwnersPolicy)]
-        [ProducesResponseType(typeof(FetchArchivedReportsResponse), 200)]
+        [ProducesResponseType(typeof(FetchArchivedReportsResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> FetchArchivedReports(
             [FromQuery] FetchArchivedReportsRequest request)
         {
@@ -71,7 +72,7 @@ namespace MTA.API.Controllers
         /// Fetch and filter current user's reports from database. Request is paginated
         /// </summary>
         [HttpGet("reports/user")]
-        [ProducesResponseType(typeof(FetchReportsByUserResponse), 200)]
+        [ProducesResponseType(typeof(FetchReportsByUserResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> FetchReportsByUser([FromQuery] FetchReportsByUserRequest request)
         {
             var response = await mediator.Send(request);
@@ -85,7 +86,7 @@ namespace MTA.API.Controllers
         /// Create report in all categories except: Bug, Penalty and User
         /// </summary>
         [HttpPost("otherReport/create")]
-        [ProducesResponseType(typeof(CreateOtherReportResponse), 200)]
+        [ProducesResponseType(typeof(CreateOtherReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateOtherReport([FromForm] CreateOtherReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -99,7 +100,7 @@ namespace MTA.API.Controllers
         /// Create report in bug category
         /// </summary>
         [HttpPost("bugReport/create")]
-        [ProducesResponseType(typeof(CreateBugReportResponse), 200)]
+        [ProducesResponseType(typeof(CreateBugReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateBugReport([FromForm] CreateBugReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -113,7 +114,7 @@ namespace MTA.API.Controllers
         /// Create report in penalty category
         /// </summary>
         [HttpPost("penaltyReport/create")]
-        [ProducesResponseType(typeof(CreatePenaltyReportResponse), 200)]
+        [ProducesResponseType(typeof(CreatePenaltyReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreatePenaltyReport([FromForm] CreatePenaltyReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -127,7 +128,7 @@ namespace MTA.API.Controllers
         /// Create report in user category
         /// </summary>
         [HttpPost("userReport/create")]
-        [ProducesResponseType(typeof(CreateUserReportResponse), 200)]
+        [ProducesResponseType(typeof(CreateUserReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CreateUserReport([FromForm] CreateUserReportRequest request)
         {
             var response = await mediator.Send(request);

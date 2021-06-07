@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace MTA.API.Controllers
         /// Get current user's purchases from database. Request is paginated
         /// </summary>
         [HttpGet("user/filter")]
-        [ProducesResponseType(typeof(GetUserPurchasesResponse), 200)]
+        [ProducesResponseType(typeof(GetUserPurchasesResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetUserPurchases([FromQuery] GetUserPurchasesRequest request)
         {
             var response = await mediator.Send(request);
@@ -35,12 +36,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[Authorize=AllAdmins]</b> <br/><br/>
+        /// [Authorize=AllAdmins]
         /// Get and filter purchases from database. Request is paginated
         /// </summary>
         [HttpGet("admin/filter")]
         [Authorize(Policy = Constants.AllAdminsPolicy)]
-        [ProducesResponseType(typeof(GetPurchasesByAdminResponse), 200)]
+        [ProducesResponseType(typeof(GetPurchasesByAdminResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetPurchasesByAdmin([FromQuery] GetPurchasesByAdminRequest request)
         {
             var response = await mediator.Send(request);

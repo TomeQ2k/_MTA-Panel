@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ using Serilog;
 namespace MTA.API.Controllers
 {
     /// <summary>
-    /// <b>[Authorize]</b> <br/><br/>
+    /// [Authorize]
     /// Controller which provides support panel management
     /// </summary>
     public class SupportManagerController : BaseController
@@ -23,12 +24,12 @@ namespace MTA.API.Controllers
         }
 
         /// <summary>
-        /// <b>[Authorize=AdminsAndSupporters]</b> <br/><br/>
+        /// [Authorize=AdminsAndSupporters]
         /// Find all users who are allowed to be assigned to specified category report 
         /// </summary>
         [HttpGet("allowedAssignees")]
         [Authorize(Policy = Constants.AdminsAndSupportersPolicy)]
-        [ProducesResponseType(typeof(GetReportsAllowedAssigneesResponse), 200)]
+        [ProducesResponseType(typeof(GetReportsAllowedAssigneesResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> GetReportsAllowedAssignees(
             [FromQuery] GetReportsAllowedAssigneesRequest request)
         {
@@ -43,7 +44,7 @@ namespace MTA.API.Controllers
         /// Add report comment to specified report
         /// </summary>
         [HttpPost("report/addComment")]
-        [ProducesResponseType(typeof(AddReportCommentResponse), 200)]
+        [ProducesResponseType(typeof(AddReportCommentResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> AddReportComment(AddReportCommentRequest request)
         {
             var response = await mediator.Send(request);
@@ -58,7 +59,7 @@ namespace MTA.API.Controllers
         /// Add report subscriber to specified report
         /// </summary>
         [HttpPost("report/addSubscriber")]
-        [ProducesResponseType(typeof(AddReportSubscriberResponse), 200)]
+        [ProducesResponseType(typeof(AddReportSubscriberResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> AddReportSubscriber(AddReportSubscriberRequest request)
         {
             var response = await mediator.Send(request);
@@ -73,7 +74,7 @@ namespace MTA.API.Controllers
         /// Remove report subscriber in specified report
         /// </summary>
         [HttpDelete("report/removeSubscriber")]
-        [ProducesResponseType(typeof(RemoveReportSubscriberResponse), 200)]
+        [ProducesResponseType(typeof(RemoveReportSubscriberResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> RemoveReportSubscriber([FromQuery] RemoveReportSubscriberRequest request)
         {
             var response = await mediator.Send(request);
@@ -88,7 +89,7 @@ namespace MTA.API.Controllers
         /// Close specified report
         /// </summary>
         [HttpPatch("report/close")]
-        [ProducesResponseType(typeof(CloseReportResponse), 200)]
+        [ProducesResponseType(typeof(CloseReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> CloseReport(CloseReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -102,7 +103,7 @@ namespace MTA.API.Controllers
         /// Archive specified report
         /// </summary>
         [HttpPatch("report/archive")]
-        [ProducesResponseType(typeof(ArchiveReportResponse), 200)]
+        [ProducesResponseType(typeof(ArchiveReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> ArchiveReport(ArchiveReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -116,7 +117,7 @@ namespace MTA.API.Controllers
         /// Toggle privacy status of specified report
         /// </summary>
         [HttpPatch("report/togglePrivacy")]
-        [ProducesResponseType(typeof(TogglePrivacyReportResponse), 200)]
+        [ProducesResponseType(typeof(TogglePrivacyReportResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> TogglePrivacyReport(TogglePrivacyReportRequest request)
         {
             var response = await mediator.Send(request);
@@ -131,7 +132,7 @@ namespace MTA.API.Controllers
         /// Move specified report assignment to another allowed user
         /// </summary>
         [HttpPatch("report/moveAssignment")]
-        [ProducesResponseType(typeof(MoveReportAssignmentResponse), 200)]
+        [ProducesResponseType(typeof(MoveReportAssignmentResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> MoveReportAssignment(MoveReportAssignmentRequest request)
         {
             var response = await mediator.Send(request);
@@ -146,7 +147,7 @@ namespace MTA.API.Controllers
         /// Accept automatic report assignment
         /// </summary>
         [HttpPatch("report/acceptAssignment")]
-        [ProducesResponseType(typeof(AcceptReportAssignmentResponse), 200)]
+        [ProducesResponseType(typeof(AcceptReportAssignmentResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> AcceptReportAssignment(AcceptReportAssignmentRequest request)
         {
             var response = await mediator.Send(request);
@@ -161,7 +162,7 @@ namespace MTA.API.Controllers
         /// Reject automatic report assignment and set AssigneeId as null
         /// </summary>
         [HttpPatch("report/rejectAssignment")]
-        [ProducesResponseType(typeof(RejectReportAssignmentResponse), 200)]
+        [ProducesResponseType(typeof(RejectReportAssignmentResponse), (int) HttpStatusCode.OK)]
         public async Task<IActionResult> RejectReportAssignment(RejectReportAssignmentRequest request)
         {
             var response = await mediator.Send(request);
