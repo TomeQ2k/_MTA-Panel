@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class CannotGenerateTokenException : Exception
+    public class CannotGenerateTokenException : ApplicationException
     {
         public string ErrorCode { get; }
 

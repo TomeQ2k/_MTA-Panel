@@ -1,0 +1,43 @@
+﻿using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
+using MTA.Core.Application.Exceptions;
+using MTA.Core.Application.Features.Requests.Commands;
+using MTA.Core.Application.Features.Responses.Commands;
+using MTA.Core.Application.Services;
+using MTA.Core.Common.Enums.Permissions;
+using MTA.Core.Common.Helpers;
+
+namespace MTA.Core.Application.Features.Handlers.Commands
+{
+    public class
+        RejectReportAssignmentCommand : IRequestHandler<RejectReportAssignmentRequest, RejectReportAssignmentResponse>
+    {
+        private readonly IReportManager reportManager;
+        private readonly IReportValidationHub reportValidationHub;
+
+        public RejectReportAssignmentCommand(IReportManager reportManager, IReportValidationHub reportValidationHub)
+        {
+            this.reportManager = reportManager;
+            this.reportValidationHub = reportValidationHub;
+        }
+
+        public async Task<RejectReportAssignmentResponse> Handle(RejectReportAssignmentRequest request,
+            CancellationToken cancellationToken)
+        {
+            var report =
+                await reportValidationHub.ValidateAndReturnReport(request.ReportId, ReportPermission.RejectAssignment)
+                ?? throw new NoPermissionsException(ErrorMessages.NotAllowedMessage);
+
+            var result = await reportManager.RejectReportAssignment(report);
+
+            return result.IsSucceeded
+                ? new RejectReportAssignmentResponse
+                {
+                    IsSucceeded = result.IsSucceeded,
+                    IsAccepted = result.IsAccepted
+                }
+                : throw new CrudException("Accept report assignment failed");
+        }
+    }
+}

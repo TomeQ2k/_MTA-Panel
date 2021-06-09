@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class CrudException : Exception
+    public class CrudException : ApplicationException
     {
         public string ErrorCode { get; }
 

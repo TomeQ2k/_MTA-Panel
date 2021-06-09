@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class PremiumOperationException : Exception
+    public class PremiumOperationException : ApplicationException
     {
         public string ErrorCode { get; }
 

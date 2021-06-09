@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class ChangePasswordException : Exception
+    public class ChangePasswordException : ApplicationException
     {
         public string ErrorCode { get; }
 

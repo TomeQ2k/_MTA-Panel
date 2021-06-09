@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
-using MTA.Core.Application.Logic.Requests.Queries;
-using MTA.Core.Application.Logic.Responses.Queries;
+using MTA.Core.Application.Features.Requests.Queries;
+using MTA.Core.Application.Features.Responses.Queries;
 using Serilog;
 
 namespace MTA.API.Controllers

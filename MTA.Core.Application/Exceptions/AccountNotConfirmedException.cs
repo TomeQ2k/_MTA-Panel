@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class AccountNotConfirmedException : Exception
+    public class AccountNotConfirmedException : ApplicationException
     {
         public string ErrorCode { get; }
 

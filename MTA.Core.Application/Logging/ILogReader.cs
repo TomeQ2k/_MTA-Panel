@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MTA.Core.Application.Logic.Requests.Queries.Params;
+using MTA.Core.Application.Features.Requests.Queries.Params;
 using MTA.Core.Application.Models;
 
 namespace MTA.Core.Application.Logging

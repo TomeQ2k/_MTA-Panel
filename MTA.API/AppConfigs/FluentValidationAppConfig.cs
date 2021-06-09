@@ -1,7 +1,7 @@
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using MTA.Core.Application.Logic.Requests.Commands;
-using MTA.Core.Application.Logic.Requests.Queries;
+using MTA.Core.Application.Features.Requests.Commands;
+using MTA.Core.Application.Features.Requests.Queries;
 
 namespace MTA.API.AppConfigs
 {

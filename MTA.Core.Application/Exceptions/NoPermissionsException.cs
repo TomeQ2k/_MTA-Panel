@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class NoPermissionsException : Exception
+    public class NoPermissionsException : ApplicationException
     {
         public string ErrorCode { get; }
 

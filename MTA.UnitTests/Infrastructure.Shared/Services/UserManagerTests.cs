@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Moq;
 using MTA.Core.Application.Exceptions;
-using MTA.Core.Application.Logic.Requests.Commands;
+using MTA.Core.Application.Features.Requests.Commands;
 using MTA.Core.Application.Results;
 using MTA.Core.Application.Services;
 using MTA.Core.Application.Services.ReadOnly;

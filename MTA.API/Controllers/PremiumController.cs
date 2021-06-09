@@ -4,9 +4,9 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MTA.Core.Application.Extensions;
 using MTA.Core.Application.Factories;
+using MTA.Core.Application.Features.Requests.Commands;
+using MTA.Core.Application.Features.Responses.Commands;
 using MTA.Core.Application.Helpers;
-using MTA.Core.Application.Logic.Requests.Commands;
-using MTA.Core.Application.Logic.Responses.Commands;
 using MTA.Core.Common.Enums;
 using Serilog;
 

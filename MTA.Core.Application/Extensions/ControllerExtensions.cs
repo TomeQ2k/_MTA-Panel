@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MTA.Core.Application.Logic.Responses;
+using MTA.Core.Application.Features.Responses;
 
 namespace MTA.Core.Application.Extensions
 {

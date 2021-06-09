@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class ProfileUpdateException : Exception
+    public class ProfileUpdateException : ApplicationException
     {
         public string ErrorCode { get; }
 

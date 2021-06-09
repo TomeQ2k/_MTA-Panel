@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Moq;
-using MTA.Core.Application.Logic.Handlers.Commands;
-using MTA.Core.Application.Logic.Requests.Commands;
-using MTA.Core.Application.Logic.Responses.Commands;
+using MTA.Core.Application.Features.Handlers.Commands;
+using MTA.Core.Application.Features.Requests.Commands;
+using MTA.Core.Application.Features.Responses.Commands;
 using MTA.Core.Application.Models;
 using MTA.Core.Application.Results;
 using MTA.Core.Application.Services;

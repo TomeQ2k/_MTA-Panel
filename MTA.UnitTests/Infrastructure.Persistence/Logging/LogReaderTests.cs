@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using Moq;
+using MTA.Core.Application.Features.Requests.Queries;
+using MTA.Core.Application.Features.Requests.Queries.Params;
 using MTA.Core.Application.Logging;
-using MTA.Core.Application.Logic.Requests.Queries;
-using MTA.Core.Application.Logic.Requests.Queries.Params;
 using MTA.Core.Application.Models;
 using MTA.Core.Application.Services;
 using MTA.Core.Application.Services.ReadOnly;

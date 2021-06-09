@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using MTA.Core.Application.Exceptions;
-using MTA.Core.Application.Logic.Requests.Commands;
+using MTA.Core.Application.Features.Requests.Commands;
 using MTA.Core.Application.Models;
 using MTA.Core.Application.Results;
 using MTA.Core.Application.Services;

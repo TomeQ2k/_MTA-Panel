@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using MTA.Core.Application.Filters;
-using MTA.Core.Application.Validators;
+using MTA.Core.Application.Validation;
 
 namespace MTA.API.AppConfigs
 {

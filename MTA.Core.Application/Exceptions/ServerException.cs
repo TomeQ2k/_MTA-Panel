@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class ServerException : Exception
+    public class ServerException : ApplicationException
     {
         public string ErrorCode { get; }
 

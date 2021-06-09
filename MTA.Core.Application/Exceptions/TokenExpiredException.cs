@@ -1,10 +1,9 @@
 ﻿using System;
-using MTA.Core.Application.Helpers;
 using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class TokenExpiredException : Exception
+    public class TokenExpiredException : ApplicationException
     {
         public string ErrorCode { get; }
 

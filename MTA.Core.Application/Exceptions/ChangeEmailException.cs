@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class ChangeEmailException : Exception
+    public class ChangeEmailException : ApplicationException
     {
         public string ErrorCode { get; }
 

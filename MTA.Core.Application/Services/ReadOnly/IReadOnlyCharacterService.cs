@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MTA.Core.Application.Logic.Requests.Queries;
+using MTA.Core.Application.Features.Requests.Queries;
 using MTA.Core.Application.Models;
 using MTA.Core.Domain.Entities;
 

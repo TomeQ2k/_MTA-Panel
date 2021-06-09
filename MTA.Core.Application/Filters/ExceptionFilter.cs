@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using MTA.Core.Application.Exceptions;
 using MTA.Core.Application.Extensions;
-using MTA.Core.Application.Logic.Responses;
+using MTA.Core.Application.Features.Responses;
 using MTA.Core.Application.Models;
 using MTA.Core.Common.Helpers;
 using MTA.Core.Domain.Data;

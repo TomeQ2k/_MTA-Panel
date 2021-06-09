@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MTA.Core.Application.Dtos;
-using MTA.Core.Application.Logic.Requests.Commands;
+using MTA.Core.Application.Features.Requests.Commands;
 using MTA.Core.Application.Models;
 using MTA.Core.Common.Enums;
 using MTA.Core.Common.Helpers;

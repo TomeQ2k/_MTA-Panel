@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class OldPasswordInvalidException : Exception
+    public class OldPasswordInvalidException : ApplicationException
     {
         public string ErrorCode { get; }
 

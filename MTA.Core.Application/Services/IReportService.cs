@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using MTA.Core.Application.Logic.Requests.Commands;
+using MTA.Core.Application.Features.Requests.Commands;
 using MTA.Core.Application.Services.ReadOnly;
 using MTA.Core.Domain.Entities;
 

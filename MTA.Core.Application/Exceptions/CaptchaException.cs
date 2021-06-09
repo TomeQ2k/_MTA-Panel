@@ -4,7 +4,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class CaptchaException : Exception
+    public class CaptchaException : ApplicationException
     {
         public string ErrorCode { get; }
 

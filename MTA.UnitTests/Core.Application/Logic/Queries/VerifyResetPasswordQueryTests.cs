@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Moq;
-using MTA.Core.Application.Logic.Handlers.Queries;
-using MTA.Core.Application.Logic.Requests.Queries;
-using MTA.Core.Application.Logic.Responses.Queries;
+using MTA.Core.Application.Features.Handlers.Queries;
+using MTA.Core.Application.Features.Requests.Queries;
+using MTA.Core.Application.Features.Responses.Queries;
 using MTA.Core.Application.Services;
 using NUnit.Framework;
 

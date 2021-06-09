@@ -3,7 +3,7 @@ using MTA.Core.Common.Helpers;
 
 namespace MTA.Core.Application.Exceptions
 {
-    public class DuplicateException : Exception
+    public class DuplicateException : ApplicationException
     {
         public string ErrorCode { get; }
 

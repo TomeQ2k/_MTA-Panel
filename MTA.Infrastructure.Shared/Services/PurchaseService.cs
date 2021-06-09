@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MTA.Core.Application.Exceptions;
 using MTA.Core.Application.Extensions;
-using MTA.Core.Application.Logic.Requests.Queries.Params;
+using MTA.Core.Application.Features.Requests.Queries.Params;
 using MTA.Core.Application.Models;
 using MTA.Core.Application.Services;
 using MTA.Core.Domain.Data;
