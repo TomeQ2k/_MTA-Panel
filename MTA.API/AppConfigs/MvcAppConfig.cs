@@ -19,7 +19,7 @@ namespace MTA.API.AppConfigs
 
                     options.Filters.Add(new AuthorizeFilter(policy));
                     options.Filters.Add(typeof(ExceptionFilter));
-                    options.Filters.Add(typeof(MainValidator));
+                    options.Filters.Add(typeof(ValidatorBehavior));
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .AddMvcOptions(options => options.EnableEndpointRouting = false)
