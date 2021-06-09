@@ -1,11 +1,13 @@
-﻿namespace MTA.Core.Application.Models
+﻿using System.Collections.Generic;
+
+namespace MTA.Core.Application.Models
 {
     public record ValidationError
     {
-        public string Field { get; init; }
-        public string Message { get; init; }
+        public string Field { get; }
+        public IEnumerable<string> Message { get; }
 
-        public ValidationError(string field, string message)
-            => (Field, Message) = (field != string.Empty ? field : null, message);
+        public ValidationError(string field, IEnumerable<string> messages)
+            => (Field, Message) = (field != string.Empty ? field : null, messages);
     }
 }

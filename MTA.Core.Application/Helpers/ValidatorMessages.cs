@@ -2,7 +2,7 @@
 {
     public static class ValidatorMessages
     {
-        public const string MainValidatorMessage = "Invalid input data";
+        public const string MainValidatorMessage = "One or more validation failures have occurred";
 
         public const string WhitespacesNotAllowedValidatorMessage = "Whitespaces are not allowed";
         public const string EmailAddressValidatorMessage = "Invalid email address";
