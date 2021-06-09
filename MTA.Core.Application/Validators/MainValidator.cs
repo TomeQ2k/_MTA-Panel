@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System.Net;
+using Microsoft.AspNetCore.Mvc.Filters;
 using MTA.Core.Application.Helpers;
 using MTA.Core.Application.Models;
 using MTA.Core.Common.Helpers;
@@ -11,7 +12,8 @@ namespace MTA.Core.Application.Validators
         {
             if (!context.ModelState.IsValid)
                 context.Result = new ValidationFailedResult(context.ModelState,
-                    Error.Build(ErrorCodes.ValidationError, ValidatorMessages.MainValidatorMessage));
+                    Error.Build(ErrorCodes.ValidationError, ValidatorMessages.MainValidatorMessage,
+                        HttpStatusCode.UnprocessableEntity));
         }
     }
 }
