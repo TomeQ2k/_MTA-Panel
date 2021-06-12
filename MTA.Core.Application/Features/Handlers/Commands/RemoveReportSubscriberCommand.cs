@@ -10,6 +10,7 @@ using MTA.Core.Application.Features.Responses.Commands;
 using MTA.Core.Application.Helpers;
 using MTA.Core.Application.Services;
 using MTA.Core.Application.SignalR;
+using MTA.Core.Application.SignalR.Hubs;
 using MTA.Core.Common.Enums.Permissions;
 using MTA.Core.Common.Helpers;
 

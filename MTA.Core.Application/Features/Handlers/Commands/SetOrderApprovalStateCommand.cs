@@ -11,6 +11,7 @@ using MTA.Core.Application.Features.Responses.Commands;
 using MTA.Core.Application.Helpers;
 using MTA.Core.Application.Services;
 using MTA.Core.Application.SignalR;
+using MTA.Core.Application.SignalR.Hubs;
 
 namespace MTA.Core.Application.Features.Handlers.Commands
 {

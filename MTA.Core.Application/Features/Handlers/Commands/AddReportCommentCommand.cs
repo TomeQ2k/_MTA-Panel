@@ -12,6 +12,7 @@ using MTA.Core.Application.Helpers;
 using MTA.Core.Application.Services;
 using MTA.Core.Application.ServicesUtils;
 using MTA.Core.Application.SignalR;
+using MTA.Core.Application.SignalR.Hubs;
 using MTA.Core.Application.SmartEnums;
 using MTA.Core.Common.Enums;
 using MTA.Core.Common.Enums.Permissions;

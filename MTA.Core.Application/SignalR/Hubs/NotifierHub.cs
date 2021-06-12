@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace MTA.Core.Application.SignalR
+namespace MTA.Core.Application.SignalR.Hubs
 {
     public class NotifierHub : HubClient
     {

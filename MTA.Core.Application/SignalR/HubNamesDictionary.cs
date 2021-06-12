@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MTA.Core.Application.SignalR.Hubs;
 
 namespace MTA.Core.Application.SignalR
 {

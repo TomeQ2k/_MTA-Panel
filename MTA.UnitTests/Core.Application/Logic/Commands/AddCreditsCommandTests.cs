@@ -8,6 +8,7 @@ using MTA.Core.Application.Features.Responses.Commands;
 using MTA.Core.Application.Results;
 using MTA.Core.Application.Services;
 using MTA.Core.Application.SignalR;
+using MTA.Core.Application.SignalR.Hubs;
 using NUnit.Framework;
 
 namespace MTA.UnitTests.Core.Application.Logic.Commands

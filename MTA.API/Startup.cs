@@ -16,6 +16,7 @@ using MTA.API.AppConfigs;
 using MTA.Core.Application.Logging;
 using MTA.Core.Application.Mapper;
 using MTA.Core.Application.SignalR;
+using MTA.Core.Application.SignalR.Hubs;
 using MTA.Core.Common.Helpers;
 
 namespace MTA.API
