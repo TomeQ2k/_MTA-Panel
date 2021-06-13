@@ -31,11 +31,13 @@ namespace MTA.API
                 {
                     Log.Information("Application started...");
 
+                    Log.Information("Application initialized");
+
                     host.Run();
                 }
                 catch (Exception ex)
                 {
-                    Log.Fatal(ex, "Application terminated unexpectedly...");
+                    Log.Error(ex, "Application terminated unexpectedly...");
                 }
                 finally
                 {
@@ -46,10 +48,7 @@ namespace MTA.API
 
         public static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .UseSerilog();
     }
 }
