@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using AspNetCoreRateLimit;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -108,6 +109,8 @@ namespace MTA.API
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            
+            app.UseIpRateLimiting();
 
             app.ConfigureLogging();
 
